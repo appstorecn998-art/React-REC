@@ -1,0 +1,67 @@
+# Dependencies and generated builds
+node_modules/
+/dist/
+/release/app/
+/desktop-host/publish/
+/desktop-host/**/bin/
+/desktop-host/**/obj/
+/.vs/
+*.csproj.user
+/React REC.exe
+
+# Python and generated working files
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+/output/
+/.tmp/
+.ocr-jobs*/
+.autowatcher*/
+*.log
+*.tmp
+Thumbs.db
+.DS_Store
+
+# Local configuration, credentials and receipt data
+/data-location.json
+/data/
+/.agents/
+/.codex/
+/.aws/
+local-profile/
+local-data/
+.receiving/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*service-account*.json
+google-sheets-key.json
+gemini_api_key.txt
+credentials.json
+token.json
+*.sqlite*
+*.db
+~$*.xls*
+DanhMuc.xlsm
+NhaCungCap.json
+TongHopPhieuNgay_*.xlsx
+/public/receipts/
+/src/receipts.json
+/reviewed_row_locations.json
+/runtime/tests/preview.png
+
+# Local exports, investigation notes and one-off data scripts
+/code-backend.txt
+/code-frontend.txt
+/du-an-rec.txt
+/docs/CONTINUATION.md
+/docs/DATA-IMPORT-*.md
+/docs/PROJECT_CONTEXT.md
+/docs/runtime-origin.json
+/tools/apply_day20_review.py

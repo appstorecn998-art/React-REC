@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>REC · Phòng thử OCR</title>
+<style>
+:root{font-family:Segoe UI,system-ui,sans-serif;color:#18324b;background:#f1f5f9;font-size:15px}*{box-sizing:border-box}body{margin:0}header{padding:24px 32px;background:#fff;border-bottom:1px solid #dbe4ec}header small{color:#167478;font-weight:700;letter-spacing:.12em}h1{font-size:28px;margin:8px 0}p{line-height:1.6;margin:6px 0;color:#506579}main{max-width:1700px;margin:auto;padding:24px 32px}button,select,textarea{font:inherit;border:1px solid #b8c8d6;border-radius:8px;padding:10px;background:white;color:inherit}button{cursor:pointer;min-height:44px}button.primary{background:#126b70;color:#fff;border-color:#126b70}button:disabled{opacity:.55;cursor:wait}:focus-visible{outline:3px solid #b25e00;outline-offset:3px}.toolbar{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}.toolbar label{display:grid;gap:6px}select{min-width:260px}.badge{padding:7px 12px;background:#e5f3f2;color:#13575a;border-radius:30px}.stats{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.stat{background:#fff;border:1px solid #dbe4ec;border-radius:12px;padding:14px 20px;min-width:160px}.stat strong{display:block;font-size:24px;margin-bottom:4px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border:1px solid #dbe4ec;border-radius:12px;overflow:hidden;min-width:0}.card h2{font-size:17px;margin:0;padding:14px 18px;border-bottom:1px solid #e2e8ef}.image{height:560px;overflow:auto;background:#dce3e9;text-align:center}.image img{width:100%;height:100%;object-fit:contain}.image.zoom img{width:160%;max-width:none;height:auto;object-fit:initial}.table-wrap{overflow:auto;max-height:410px;container-type:inline-size}table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}caption{text-align:left;padding:12px 16px;color:#52677b}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e6ecf1;min-width:80px}thead{position:sticky;top:0;z-index:2;background:#eef4f7}th[scope=row]{position:sticky;left:0;background:white}td.name{min-width:240px}td.diff{background:#fff0ce;border-bottom-color:#d9b879}h3{font-size:15px}section.review{background:white;border:1px solid #dbe4ec;border-radius:12px;padding:20px;margin-top:18px}textarea{width:100%;min-height:90px;display:block;margin:8px 0 12px}.hint{font-size:13px}#error{color:#a42f21}#status{min-height:24px}.review label{font-weight:600}a{color:#126b70}@media(max-width:850px){header,main{padding:18px}.pair{grid-template-columns:1fr}.image{height:430px}.toolbar>*{max-width:100%}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+:root{color:#1f2937;background:#f7f8fa}p,caption{color:#64748b}table{font-size:14px;font-variant-numeric:tabular-nums lining-nums}thead{background:#f3f4f6}thead th{font-size:12px;font-weight:600;color:#475569}th,td{padding:10px 12px;height:40px;border-color:#e5e7eb;vertical-align:top}th:first-child{min-width:44px;text-align:center}td.numeric,th.numeric{text-align:right;white-space:nowrap;min-width:90px}td.amount{font-weight:500}td.name{min-width:200px;max-width:320px;white-space:normal;overflow-wrap:anywhere}td.diff{background:#fffbeb;border-color:#f3e5b5;color:#92400e}td.format{background:#f8fafc}td.uncertain{background:#fff7ed;color:#9a3412}.cell-note{display:block;font-size:11px;line-height:1.4;font-weight:400;margin-top:3px;white-space:normal}.format .cell-note{color:#64748b}.view-options{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:14px 0}.view-options label{display:grid;gap:5px;font-size:13px}.view-options select{min-width:160px}.compact th,.compact td{height:36px;padding-block:8px}.comfortable th,.comfortable td{height:44px;padding-block:12px}tbody tr:hover td:not(.diff):not(.uncertain){background:#f8fafc}@container(width < 680px){th,td{padding-inline:8px}td.name{min-width:160px}} 
+
+.event-log{max-height:600px;overflow:auto;border:1px solid #dbe4ec;border-radius:8px;background:#fff;margin:12px 0}.event{padding:12px 16px;border-bottom:1px solid #e5e7eb}.event.warning{border-left:4px solid #b45309;background:#fffbeb}.event.error{border-left:4px solid #b91c1c;background:#fef2f2}.event-title{font-weight:600;font-size:14px}.event-meta{font-size:12px;color:#64748b;margin-bottom:4px}.event pre{font:12px/1.6 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0;color:#374151}.event pre:empty{display:none}#new-photo{max-width:700px}#new-progress{width:min(500px,100%)}
+
+#new-status{font-size:18px;font-weight:600;color:#1f2937}.eta{font-size:16px;color:#0f766e;margin:10px 0}.workflow{padding:0;list-style:none;display:grid;gap:10px;margin:18px 0}.step{padding:14px 16px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#64748b}.step.done{background:#fff;color:#1f2937}.step.active{border-color:#0f766e;background:#f0fdfa;color:#115e59}.step.failed{border-color:#b91c1c;background:#fef2f2;color:#991b1b}.step strong{display:block;margin-bottom:4px}.step small{display:block;line-height:1.6;font-size:13px}.plain-warning{padding:10px;background:#fffbeb;color:#92400e;margin:6px 0;border-radius:6px}summary{cursor:pointer;padding:10px 0}
+</style>
+<header><small>REC / KIỂM TRA CHẤT LƯỢNG</small><h1>Phòng thử OCR</h1><p>Đối chiếu ảnh gốc với ảnh đã cắt nền, nắn bảng. Chọn một ảnh để kiểm từng dòng trước khi áp dụng rộng.</p></header>
+<main><section class="review" style="margin:0 0 22px"><h2>Đọc một ảnh khác trong kho riêng</h2><div class="toolbar"><label for="new-photo">Ảnh trong bản web riêng<select id="new-photo"></select></label><button id="read-new" class="primary">Đọc ảnh mới bằng Gemini</button></div><p class="hint">Ảnh được chọn và các vùng chi tiết sẽ gửi tới Gemini. Chỉ lưu kết quả test; không ghi báo cáo REC.</p><p id="new-status" role="status">Chưa có lượt thử mới.</p><p id="elapsed"></p><progress id="new-progress" aria-label="Đang đọc ảnh bằng Gemini" hidden></progress><div id="eta" class="eta"></div><ol id="workflow" class="workflow"></ol><div id="plain-warnings"></div><details><summary>Thông tin kỹ thuật (khi cần kiểm tra lỗi)</summary><div class="toolbar"><label for="log-level">Nhật ký hiển thị<select id="log-level"><option value="all">Tất cả chi tiết</option><option value="problems">Chỉ cảnh báo và lỗi</option></select></label><button id="download-log">Tải nhật ký JSON</button></div><div id="events" class="event-log" tabindex="0" role="region" aria-label="Nhật ký kỹ thuật OCR"></div></details><details><summary>Chi tiết kết quả đọc ảnh mới</summary><img id="new-preview" alt="Ảnh gốc đang thử đọc" hidden style="max-width:100%;max-height:600px;object-fit:contain"><div id="new-output" class="table-wrap" tabindex="0" role="region" aria-label="Kết quả ảnh mới"></div><ul id="new-warnings"></ul></details></section><div class="toolbar"><label for="photo">Ảnh mẫu ngày 20/11/2026<select id="photo"></select></label><button id="zoom" aria-pressed="false">Phóng to hai ảnh</button><button id="rerun" class="primary">Đọc lại cặp ảnh bằng Gemini</button><span class="badge" id="method"></span></div>
+<p class="hint">Đọc lại gửi hai bản ảnh tới Gemini và có thể phát sinh phí API. Kết quả test được lưu riêng.</p><p id="status" role="status"></p><p id="error" role="alert"></p>
+<div class="stats"><div class="stat"><strong id="complete">—</strong>Cặp ảnh đã đọc / 12</div><div class="stat"><strong id="counts">—</strong>Số dòng gốc / đã xử lý</div><div class="stat"><strong id="diffs">—</strong>Ô khác nhau cần đối chiếu</div></div>
+<div class="view-options"><label for="number-view">Hiển thị số<select id="number-view"><option value="readable">Dễ đọc · định dạng Việt</option><option value="raw">Văn bản OCR gốc</option></select></label><label for="density">Khoảng cách dòng<select id="density"><option value="standard">Vừa · 40 px</option><option value="compact">Gọn · 36 px</option><option value="comfortable">Dễ đọc · 44 px</option></select></label><span class="hint">Hai bảng cuộn cùng nhau. Di chuột lên số để xem OCR gốc.</span></div><p id="supplier"></p><p class="hint">Vàng: khác nội dung/giá trị. Nhãn “Khác định dạng”: cùng số sau khi phân tích chắc chắn. Nhãn “Chưa rõ”: dấu phân cách còn mơ hồ. Chưa phải kết luận đúng/sai. Ghép theo vị trí dòng; nếu lệch số dòng, đối chiếu lại cả bảng.</p>
+<div class="pair"><article class="card"><h2>Ảnh gốc · cùng hướng xoay và độ phân giải</h2><div class="image"><img id="original-image" alt="Phiếu gốc để đối chiếu nội dung"></div><div id="original-table" class="table-wrap" tabindex="0" role="region" aria-label="Kết quả OCR ảnh gốc"></div></article><article class="card"><h2>Ảnh đã xử lý · cắt nền → nắn bảng</h2><div class="image"><img id="processed-image" alt="Phiếu sau khi cắt nền và nắn bảng"></div><div id="processed-table" class="table-wrap" tabindex="0" role="region" aria-label="Kết quả OCR ảnh đã xử lý"></div></article></div>
+<section class="review"><h2>Phát hiện từ lần kiểm đầu</h2><p class="hint">Đối chiếu bằng mắt với ảnh gốc; các dòng không ghi dưới đây chưa được chấm chính xác toàn bộ.</p><ul id="findings"></ul><h2>Ghi nhận khi kiểm ảnh</h2><label for="notes">Dòng sai, giá trị đúng và bản đọc tốt hơn</label><textarea id="notes" placeholder="Ví dụ: dòng 3 — thực nhận trên ảnh là 0, bản đã xử lý đọc đúng…"></textarea><p id="saved" class="hint">Ghi chú tự lưu trong trình duyệt này; không tự huấn luyện hay sửa báo cáo REC.</p><button id="export">Tải kết quả và ghi chú (.json)</button><p class="hint" id="model"></p><a href="http://127.0.0.1:8768/">Trở về REC</a></section></main>
+<script>
+const $=id=>document.getElementById(id), fields=[['item_name','Tên hàng'],['quantity','Lượng giao'],['received_quantity','Thực nhận'],['unit_price','Đơn giá (VND)'],['line_amount','Thành tiền (VND)']];
+let state,selected='',zoom=false,overrides={},pending=false;
+const norm=x=>String(x??'').normalize('NFC').toLocaleLowerCase('vi').replace(/\s+/g,' ').trim();
+// Only normalize unambiguous forms; a single separator with three trailing digits is ambiguous.
+function numeric(raw){
+ const s=String(raw??'').trim();let canonical;
+ if(/^[+-]?\d+$/.test(s))canonical=s;
+ else if(/^[+-]?\d{1,3}(?:\.\d{3})+,\d+$/.test(s))canonical=s.replaceAll('.','').replace(',','.');
+ else if(/^[+-]?\d{1,3}(?:,\d{3})+\.\d+$/.test(s))canonical=s.replaceAll(',','');
+ else if(/^[+-]?\d+[.,]\d+$/.test(s)){
+  const parts=s.split(/[.,]/);if(parts[1].length===3&&!/^[+-]?0$/.test(parts[0]))return null;
+  canonical=s.replace(',','.');
+ }else return null;
+ const value=Number(canonical);return Number.isFinite(value)&&Math.abs(value)<=Number.MAX_SAFE_INTEGER?value:null;
+}
+function difference(key,a,b){if(norm(a)===norm(b))return '';if(key!=='item_name'){const x=numeric(a),y=numeric(b);if(x!==null&&y!==null&&x===y)return 'format'}return 'diff'}
+const numberFormat=new Intl.NumberFormat('vi-VN',{maximumFractionDigits:12});
+function displayValue(key,raw){if(key==='item_name'||$('number-view').value==='raw')return raw||'—';const n=numeric(raw);return n===null?(raw||'—'):numberFormat.format(n)}
+function cell(tag,text){const e=document.createElement(tag);e.textContent=text??'';return e}
+function noteKey(){return 'rec-ocr-review-v1:'+selected}
+function current(){const p=state.pairs.find(p=>p.name===selected);return {...p,...overrides[selected]}}
+function render(){const p=current();if(!p)return;
+ $('findings').replaceChildren(...(state.findings[selected]||['Chưa có kết luận kiểm bằng mắt cho ảnh này.']).map(text=>cell('li',text)));
+ $('method').textContent=p.method;$('model').textContent='Model: '+state.model+' · Bộ thử 12 ảnh · Chưa phải tỷ lệ chính xác đã xác nhận';
+ $('complete').textContent=state.pairs.filter(x=>x.original&&x.processed).length;
+ const a=p.original?.document.items??[],b=p.processed?.document.items??[];
+ $('counts').textContent=a.length+' / '+b.length;
+ let diffs=0;for(let i=0;i<Math.max(a.length,b.length);i++)for(const [key] of fields)if(difference(key,a[i]?.[key],b[i]?.[key])==='diff')diffs++;
+ $('diffs').textContent=diffs;$('supplier').textContent='Nhà cung cấp: '+(p.original?.document.supplier_name||'—')+' / '+(p.processed?.document.supplier_name||'—');
+ for(const [mode,rows,other] of [['original',a,b],['processed',b,a]]){
+  const image=$(`${mode}-image`),src='/image?name='+encodeURIComponent(selected)+'&mode='+mode;if(image.getAttribute('src')!==src)image.src=src;
+  const table=document.createElement('table');table.append(cell('caption',rows.length+' dòng · '+(p[mode]?.seconds??'—')+' giây'));
+  const thead=document.createElement('thead'),hr=document.createElement('tr');for(const title of ['Dòng',...fields.map(f=>f[1])]){const th=cell('th',title);th.scope='col';if(hr.children.length>1)th.className='numeric';hr.append(th)}thead.append(hr);table.append(thead);
+  const tbody=document.createElement('tbody');rows.forEach((r,i)=>{const tr=document.createElement('tr'),th=cell('th',r.source_stt||i+1);th.scope='row';tr.append(th);for(const [key] of fields){const raw=r[key],td=cell('td',displayValue(key,raw));const kind=difference(key,raw,other[i]?.[key]);
+ if(key==='item_name')td.classList.add('name');else{td.classList.add('numeric');if(key==='line_amount')td.classList.add('amount')}
+ td.title='OCR gốc: '+(raw??'')+' · Bản đối chiếu: '+(other[i]?.[key]??'không có dòng');
+ if(kind){td.classList.add(kind);const label=kind==='format'?'Khác định dạng':'Khác bản đối chiếu';td.append(cell('small',label));td.lastChild.className='cell-note'}
+ if(key!=='item_name'&&String(raw??'').trim()&&numeric(raw)===null){td.classList.add('uncertain');td.append(cell('small','Chưa rõ định dạng số'));td.lastChild.className='cell-note'}
+ tr.append(td)}tbody.append(tr)});table.append(tbody);$(`${mode}-table`).replaceChildren(table);
+ }
+ $('rerun').disabled=pending||state.job.status==='running';
+}
+async function refresh(){try{const response=await fetch('/api/state');if(!response.ok)throw Error('Không tải được dữ liệu test.');state=await response.json();if(!selected){for(const p of state.pairs){const o=cell('option',p.name);o.value=p.name;$('photo').append(o)}selected=state.pairs[0].name;loadNote()}
+ if(state.job.status==='done'&&state.job.kind!=='new')overrides[state.job.name]=state.job.results;
+ $('status').textContent=state.job.status==='running'?'Đang đọc '+state.job.name+' — bạn có thể kiểm ảnh khác trong lúc chờ.':'Đã sẵn sàng đối chiếu. Kết quả hiện có không cần gọi lại API.';
+ if(state.job.status==='error')$('error').textContent=state.job.error;renderNew();render();
+ }catch(e){$('error').textContent=e.message}}
+function loadNote(){try{$('notes').value=localStorage.getItem(noteKey())||''}catch{$('saved').textContent='Trình duyệt không cho lưu ghi chú; dùng nút tải JSON.'}}
+ $('number-view').onchange=render;
+ $('density').onchange=()=>{document.querySelectorAll('.table-wrap').forEach(e=>e.className='table-wrap '+$('density').value)};
+ const wraps=[$('original-table'),$('processed-table')];wraps.forEach((source,index)=>source.addEventListener('scroll',()=>{const target=wraps[1-index];if(Math.abs(target.scrollTop-source.scrollTop)>1)target.scrollTop=source.scrollTop;if(Math.abs(target.scrollLeft-source.scrollLeft)>1)target.scrollLeft=source.scrollLeft},{passive:true}));
+ $('photo').onchange=()=>{selected=$('photo').value;loadNote();render()};
+ $('zoom').onclick=()=>{zoom=!zoom;document.querySelectorAll('.image').forEach(e=>e.classList.toggle('zoom',zoom));$('zoom').setAttribute('aria-pressed',String(zoom));$('zoom').textContent=zoom?'Thu vừa khung':'Phóng to hai ảnh'};
+ $('notes').oninput=()=>{try{localStorage.setItem(noteKey(),$('notes').value);$('saved').textContent='Đã lưu ghi chú trên trình duyệt này.'}catch{$('saved').textContent='Không lưu được; hãy tải JSON để giữ ghi chú.'}};
+ $('rerun').onclick=async()=>{pending=true;render();$('error').textContent='';try{const r=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json','X-REC-Token':state.token},body:JSON.stringify({name:selected})});if(!r.ok){const data=await r.json();throw Error(data.error||'Không khởi động được OCR.')}await refresh()}catch(e){$('error').textContent=e.message}finally{pending=false;render()}};
+ $('export').onclick=()=>{const data={pair:current(),note:$('notes').value,model:state.model,accuracyVerified:false};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=selected+'-review.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+
+function workflowSteps(j){
+ const es=j.events||[],find=names=>es.find(e=>names.includes(e.stage));
+ const configs=[
+  {title:'Chuẩn bị ảnh',start:['prepare'],finish:['image_ready','configure'],done:'Ảnh đã sẵn sàng để đọc.',active:'Đang mở ảnh và chuẩn bị các phần chữ nhỏ.'},
+  {title:'Đọc nội dung trên ảnh',start:['configure','config_ready','waiting','details','prompt','api_send'],finish:['api_response','parse','schema','validate'],done:'Đã nhận nội dung từ Gemini.',active:'Đã gửi ảnh để đọc tên hàng, số lượng và chữ viết tay. Đang chờ kết quả trả về.'},
+  {title:'Kiểm tra kết quả',start:['api_response','parse','schema','validate'],finish:['integrity','saving'],done:'Đã kiểm tra dữ liệu và đánh dấu những chỗ cần xem lại.',active:'Đang kiểm tra các dòng hàng và tìm chỗ chưa rõ.'},
+  {title:'Lưu kết quả thử',start:['saving'],finish:['done'],done:'Kết quả đã lưu riêng, bạn có thể xem bên dưới.',active:'Đang lưu kết quả để bạn xem.'}
+ ];
+ let blocked=false;
+ return configs.map(c=>{const finish=find(c.finish),start=find(c.start);let status=finish?'done':start?'active':'pending';if(j.status==='error'&&!blocked&&!finish){status='failed';blocked=true}
+ const detail=finish?('Giây '+Number(finish.seconds).toLocaleString('vi-VN',{maximumFractionDigits:1})+': '+c.done):status==='failed'?'Bước này chưa hoàn tất. Xem thông báo lỗi bên dưới.':status==='active'?c.active:'Đang chờ bước trước.';
+ return {title:c.title,status,detail};});
+}
+function renderWorkflow(j){
+ const running=j.status==='running',done=j.status==='done',result=j.newResult;
+ const rows=result?.document?.items?.length;
+ $('new-status').textContent=done?'Đã đọc xong '+rows+' dòng hàng':j.status==='error'?'Chưa đọc xong ảnh — có lỗi cần kiểm tra':j.stage==='retry'?'Đang chờ để thử đọc lại':j.stage==='queued'||j.stage==='prepare'?'Đang chuẩn bị ảnh':j.stage==='saving'?'Đang lưu kết quả':'Đang đọc và kiểm tra ảnh';
+ $('elapsed').textContent=(running?'Đã chạy: ':'Tổng thời gian: ')+Number(j.elapsed||0).toLocaleString('vi-VN',{maximumFractionDigits:1})+' giây';
+ $('eta').textContent=running?(j.remaining==null?'Đang thu thập thời gian các lượt trước để ước tính.':j.remaining>0?'Ước tính còn khoảng '+Math.ceil(j.remaining)+' giây · dựa trên '+j.estimateSamples+' lượt đọc trước':'Đang lâu hơn dự kiến. Chương trình vẫn tiếp tục chờ; chưa nhận đủ kết quả.'):(done?'Hoàn tất · '+(result?.warnings?.length||0)+' chỗ cần xem lại':'Kết quả và nhật ký trước lỗi vẫn được giữ.');
+ $('workflow').replaceChildren(...workflowSteps(j).map((step,i)=>{const li=cell('li','');li.className='step '+step.status;li.append(cell('strong',(step.status==='done'?'✓ ':step.status==='failed'?'! ':String(i+1)+'. ')+step.title),cell('small',step.detail));if(step.status==='active')li.setAttribute('aria-current','step');return li}));
+ const warnings=[...(result?.warnings||[])];const latestError=[...(j.events||[])].reverse().find(e=>e.level==='error');
+ if(j.status==='error')warnings.push('Không đọc xong: '+(latestError?.details?.message||j.error||'Chưa rõ nguyên nhân. Mở thông tin kỹ thuật để xem chi tiết.'));
+ $('plain-warnings').replaceChildren(...warnings.map(text=>{const box=cell('p',text);box.className='plain-warning';return box}));
+}
+$('log-level').onchange=()=>{if(state)renderNew()};
+$('download-log').onclick=()=>{if(!state?.job?.events)return;const url=URL.createObjectURL(new Blob([JSON.stringify(state.job,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ocr-log-'+(state.job.id||'idle')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+let libraryLoaded=false,lastNewJob='';
+function renderNew(){
+ if(!libraryLoaded){for(const entry of state.library||[]){const option=cell('option',entry.folder+' / '+entry.name);option.value=entry.id;$('new-photo').append(option)}libraryLoaded=true}
+ const j=state.job;$('read-new').disabled=j.status==='running';$('new-photo').disabled=j.status==='running';
+ if(j.kind!=='new')return;
+ if(lastNewJob!==j.id){lastNewJob=j.id;$('new-output').replaceChildren();$('new-warnings').replaceChildren();}
+ $('new-photo').value=j.name;
+ const preview='/new-image?id='+encodeURIComponent(j.name);if($('new-preview').getAttribute('src')!==preview)$('new-preview').src=preview;$('new-preview').hidden=false;
+ renderWorkflow(j);
+ $('new-progress').hidden=j.status!=='running';
+ const events=(j.events||[]).filter(e=>$('log-level').value==='all'||['warning','error'].includes(e.level));
+ const log=$('events'),atBottom=log.scrollHeight-log.scrollTop-log.clientHeight<35;
+ log.replaceChildren(...events.map(event=>{const box=cell('div','');box.className='event '+(event.level||'info');const meta=cell('div',(event.time?event.time.slice(11,23)+' · ':'')+event.seconds+'s · '+(event.level||'info').toUpperCase()+' · '+event.stage);meta.className='event-meta';const title=cell('div',event.message);title.className='event-title';box.append(meta,title);if(event.details&&Object.keys(event.details).length)box.append(cell('pre',JSON.stringify(event.details,null,2)));return box}));
+ if(atBottom)log.scrollTop=log.scrollHeight;
+ const data=j.newResult;if(!data)return;
+ const table=document.createElement('table');table.append(cell('caption',data.document.items.length+' dòng · '+data.seconds+' giây · '+data.model));
+ const head=document.createElement('thead'),hr=document.createElement('tr');for(const title of ['STT',...fields.map(f=>f[1])]){const th=cell('th',title);th.scope='col';if(hr.children.length>1)th.className='numeric';hr.append(th)}head.append(hr);table.append(head);
+ const body=document.createElement('tbody');data.document.items.forEach((item,index)=>{const row=document.createElement('tr'),th=cell('th',item.source_stt||index+1);th.scope='row';row.append(th);for(const [key]of fields){const td=cell('td',displayValue(key,item[key]));td.className=key==='item_name'?'name':'numeric';td.title='OCR gốc: '+(item[key]||'');row.append(td)}body.append(row)});table.append(body);$('new-output').replaceChildren(table);
+ $('new-warnings').replaceChildren(...data.warnings.map(w=>cell('li',w)));
+}
+$('read-new').onclick=async()=>{const id=$('new-photo').value;$('read-new').disabled=true;$('error').textContent='';try{const response=await fetch('/api/new-run',{method:'POST',headers:{'Content-Type':'application/json','X-REC-Token':state.token},body:JSON.stringify({id})});const data=await response.json();if(!response.ok)throw Error(data.error||'Không khởi động được');$('new-preview').src='/new-image?id='+encodeURIComponent(id);$('new-preview').hidden=false;await refresh()}catch(e){$('error').textContent=e.message;$('read-new').disabled=false}};
+
+ refresh();setInterval(()=>{if(state?.job.status==='running')refresh()},1000);
+</script></html>
